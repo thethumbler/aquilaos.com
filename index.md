@@ -1,12 +1,12 @@
 ---
 layout: page
-title: Aquila OS
+title: AquilaOS
 subtitle: Hobbyist Operating System, just for the heck of it
 use-site-title: true
 ---
 
 ### What is it?
-Aquila is a complete Operating System (kernel + system) that is designed to be POSIX compliant and mostly ISA transparent.
+AquilaOS is a complete Operating System (kernel + system) that is designed to be POSIX compliant and mostly ISA transparent.
 
 ### What is cool about it anyway?
 - All interfaces implemented so far are POSIX compliant.
