@@ -47,8 +47,8 @@ navbar-children-col: "#bdc3c7"
 page-col: "#F0F0F0"
 link-col: "#008AFF"
 hover-col: "#0085A1"
-footer-col: "#bdc3c7"
-footer-text-col: "#bdc3c7"
+footer-col: "#2c3e50"
+footer-text-col: "#ecf0f1"
 footer-link-col: "#bdc3c7"
 
 # Alternatively, the navbar, footer, and page background can be set to use background images
