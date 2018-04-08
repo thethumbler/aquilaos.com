@@ -17,7 +17,7 @@ AquilaOS is a complete Operating System (kernel + system) that is designed to be
 ### How does it look like?
 This is a screenshot of AquilaOS running on qemu with 640x480 resolution. This is `fbterm` (A framebuffer based terminal) running `aqsh` (Aquila Shell - Part of aqbox).
 
-![Image of Aquila](/Aquila/img/screenshot.png)
+![Image of Aquila](/img/screenshot.png)
 
 ### How to try it?
 Simple, just grab a toolchain, build it, patch newlib and ...
