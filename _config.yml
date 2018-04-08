@@ -4,8 +4,8 @@
 # baseurl is the website's URL without the hostname
 
 # If you are building a simple GitHub user page (http://username.github.io) then use these settings:
-url: "http://mohamed-anwar.github.io/Aquila"
-baseurl: "/Aquila"
+url: "http://aquilaos.com"
+baseurl: "/"
 
 # If you are building a GitHub project page then use these settings:
 #url: "http://username.github.io/projectname"
@@ -14,10 +14,10 @@ baseurl: "/Aquila"
 # Of course don't forget to change the username and projectname to YOUR username and project
 
 # Name of website
-title: Aquila OS
+title: AquilaOS
 
 # Short description of your site
-description: POSIX compatible Operating System
+description: POSIX compliant Operating System
 
 # --- Navigation bar options --- #
 
