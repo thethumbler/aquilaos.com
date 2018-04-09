@@ -35,4 +35,4 @@ Here is a screenshot of a demo of Nuklear running on AquilaOS
 ![Image of Nuklear](/img/nuklear.png)
 
 And a video showing the switch between fbterm and Nuklear
-[](https://youtu.be/gfuRbHAGhl8)
+[https://youtu.be/gfuRbHAGhl8](https://youtu.be/gfuRbHAGhl8)
