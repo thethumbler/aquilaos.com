@@ -3,7 +3,7 @@ layout: post
 title: Nuklear based GUI
 ---
 
-I have been looking into various options of GUI/Windowing systems to implement in AquilaOS and here are what I found so far
+I have been looking into various options of GUI/Windowing systems to implement in AquilaOS and here is what I found so far
 
 ### X
 While *X* is the defacto when it comes to GUI, it is extremely heavy, mostly optimized for Linux and requires too much dependencies.
