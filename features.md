@@ -4,9 +4,18 @@ title: Features
 subtitle: You know it rocks already
 ---
 
-# Aquila OS
-UNIX-like Operating System, including the kernel and system tools.
-Intended to be fully **POSIX** compatible.
+AquilaOS is split into various modular parts
+
+### Kernel
+
+#### kernel/core
+Contains all core (misc) parts that do not fit into any subsystem (such as printk and panic)
+
+#### kernel/dev
+Devices subsystem
+
+##### kdev
+kdev services as a binding for registered character & block devices, it routes vfs requests to approrpiate device using major/minor number
 
 #### CPU-based Features:
 ##### Supported Archetictures:
@@ -17,21 +26,29 @@ Intended to be fully **POSIX** compatible.
 - Virtual Filesystem
 
 #### Supported Filesystems:
-- initramfs (CPIO Archive filesystem, used for Ramdisk, read only)
+- initramfs (used for Ramdisk, currently supports CPIO archives only, read only)
 ```
  kernel/fs/initramfs/
 ```
-- ext2 (Basic Extended 2 filesystem, no caching, read/write)
+- tmpfs (Generic temporary filesystem, read/write)
 ```
- kernel/fs/ext2/
+ kernel/fs/tmpfs/
 ```
-- devfs (Virtual filesystem, used for device handlers, read/write (device dependent))
+- devfs (tmpfs, used for device handlers, statically populated, read/write)
 ```
  kernel/fs/devfs/
 ```
-- devpts (Virtual filesystem, used for psudo-terminals)
+- devpts (tmpfs, used for psudo-terminals, dynamically populated, read/write)
 ```
  kernel/fs/devpts/
+```
+- procfs (Processes information filesystem, read only by definition)
+```
+ kernel/fs/procfs/
+```
+- ext2 (Basic Extended 2 filesystem, read/write)
+```
+ kernel/fs/ext2/
 ```
 
 #### Supported Devices:
@@ -68,4 +85,4 @@ Intended to be fully **POSIX** compatible.
 
 
 #### System Feautres:
-- Uses newlib C Library
+- Newlib C Library (version 3.0.0 latest)
