@@ -14,7 +14,7 @@ AquilaOS is a complete Operating System (kernel + system) that is designed to be
 - Lua 5 is ported to it without changing a single line of code.
 - It should be simple for anyone to read and understand the code.
 
-### How does it look like?
+### How does it look?
 This is a screenshot of AquilaOS running on qemu with 640x480 resolution. This is `fbterm` (A framebuffer based terminal) running `aqsh` (Aquila Shell - Part of aqbox).
 
 ![Image of Aquila](/img/screenshot.png)
