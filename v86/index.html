@@ -38,6 +38,50 @@ The iso image is 7.6 MB so give it sometime to load.
         term.open(document.getElementById('terminal'));
         term.write("Loading AquilaOS, please wait\r\n");
 
+        function chr_repeat(chr, count) {
+            var result = "";
+            while (count-- > 0) {
+                result += chr;
+            }
+
+            return result;
+        }
+
+        emulator.add_listener("download-progress", function(e) {
+
+          var line = "Downloading images ";
+
+          if (typeof e.file_index === "number" && e.file_count) {
+              line += "[" + (e.file_index + 1) + "/" + e.file_count + "] ";
+          }
+
+          if (e.total && typeof e.loaded === "number") {
+              var per100 = Math.floor(e.loaded / e.total * 40);
+              per100 = Math.min(40, Math.max(0, per100));
+
+              var per50 = Math.floor(per100 / 2);
+
+              line += (Math.floor(e.loaded / e.total * 100)) + "% [";
+              line += chr_repeat("#", per50);
+              line += chr_repeat(" ", 20 - per50);
+              line += "]\r";
+          } else {
+              line += chr_repeat(".", progress_ticks++ % 20);
+          }
+
+          term.write(line);
+
+          if (e.loaded >= e.total) {
+              term.write("\r\n");
+          }
+
+          if (e.file_index === e.file_count - 1 && e.loaded >= e.total - 2048) {
+              // last file is (almost) loaded
+              term.write("\r\nDone downloading. Starting now ...");
+              return;
+          }
+        });
+
         term.on('key', function (key, ev) {
             var printable = (
               !ev.altKey && !ev.altGraphKey && !ev.ctrlKey && !ev.metaKey
