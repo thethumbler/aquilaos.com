@@ -1,0 +1,430 @@
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("fonts/ibm-plex-sans.woff2") format("woff2");
+  font-weight: 100 700;
+  font-stretch: 85% 100%;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("fonts/ibm-plex-sans-italic.woff2") format("woff2");
+  font-weight: 100 700;
+  font-stretch: 85% 100%;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Martian Mono";
+  src: url("fonts/martian-mono.woff2") format("woff2");
+  font-weight: 100 800;
+  font-stretch: 75% 112.5%;
+  font-display: swap;
+}
+
+// unscii-16 is the font the AquilaOS kernel draws its early console with:
+// it's kept for what came out of the machine: the boot log, and the top bar
+@font-face {
+  font-family: "unscii";
+  src: url("fonts/unscii-16.woff") format("woff");
+  font-display: swap;
+}
+
+:root {
+  --paper: #fcfcfa;
+  --ink: #2a2824;
+  --text: #3d3b35;
+  --muted: #6f6d66;
+  --rule: #dddbd3;
+  --accent: #a2643a;      // burnt sienna
+  --fill: #f4f1ec;        // table heads and the diagram's bands
+  --fill-strong: #ebe3d8;
+
+  // the console keeps VGA text mode's colors in both themes
+  --console-bg: #000000;
+  --console-fg: #aaaaaa;
+  --console-bright: #ffffff;
+
+  --sans: "IBM Plex Sans", system-ui, sans-serif;
+  --mono: "Martian Mono", ui-monospace, monospace;
+  --vga: "unscii", ui-monospace, monospace;
+
+  --wide: 72rem;
+  --gutter: 20px;
+}
+
+@mixin dark {
+  --paper: #191917;
+  --ink: #e8e5de;
+  --text: #cfccc4;
+  --muted: #9a978f;
+  --rule: #383631;
+  --accent: #d19a6c;
+  --fill: #232120;
+  --fill-strong: #302b26;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root { @include dark; }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+a:hover { text-decoration-thickness: 2px; }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.skip {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  &:focus { left: var(--gutter); top: 8px; background: var(--paper); padding: 4px 8px; }
+}
+
+h1, h2, h3 { color: var(--ink); line-height: 1.2; text-wrap: balance; }
+h1 { font-size: 44px; font-weight: 600; letter-spacing: -0.015em; margin: 0 0 20px; }
+h2 { font-size: 27px; font-weight: 600; color: var(--accent); margin: 48px 0 14px; }
+h3 { font-size: 19px; font-weight: 600; margin: 24px 0 6px; }
+
+p, ul, ol { margin: 0 0 14px; }
+strong, b { font-weight: 600; color: var(--ink); }
+
+code, pre, kbd {
+  font-family: var(--mono);
+  font-size: 0.8em;
+  font-stretch: 100%;
+}
+
+code { color: var(--ink); }
+
+// header and footer
+
+.site-header, .site-footer, main {
+  max-width: var(--wide);
+  margin: 0 auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px 24px;
+  padding-top: 22px;
+  padding-bottom: 22px;
+  // the top bar is in the kernel's console font, like the boot log
+  font-family: var(--vga);
+  font-size: 20px;
+  line-height: 28px;
+
+  // keep the wordmark and the links on one line on phones
+  @media (max-width: 30rem) { font-size: 16px; line-height: 24px; }
+
+  a { color: var(--ink); text-decoration: none; }
+  a:hover, a[aria-current] { color: var(--accent); }
+  a[aria-current] { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.4em; }
+
+  nav { display: flex; flex-wrap: wrap; gap: 0 24px; }
+}
+
+.wordmark { color: var(--ink); }
+
+.site-footer {
+  margin-top: 72px;
+  padding-top: 18px;
+  padding-bottom: 36px;
+  // a rule as wide as the content, not the padding
+  background: linear-gradient(var(--rule), var(--rule)) no-repeat var(--gutter) 0 / calc(100% - 2 * var(--gutter)) 1px;
+  color: var(--muted);
+  font-size: 16px;
+
+  p { margin: 0 0 6px; }
+}
+
+.footer-links { display: flex; flex-wrap: wrap; gap: 0 24px; }
+
+// home
+
+.hero {
+  padding: 40px 0 48px;
+
+  @media (min-width: 62rem) { padding: 72px 0 64px; }
+
+  h1 { font-size: clamp(36px, 2.3rem + 1.5vw, 54px); line-height: 1.1; max-width: 16em; }
+}
+
+.lede { max-width: 36em; margin-bottom: 28px; font-size: 21px; color: var(--text); }
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 28px;
+  margin: 0;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 18px;
+  background: var(--accent);
+  color: var(--paper);
+  font-weight: 500;
+  text-decoration: none;
+
+  &:hover { background: var(--ink); }
+}
+
+// the key facts, under the title as on a datasheet's front page
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 48px;
+  margin: 0 0 8px;
+  padding: 14px 0;
+  border-top: 3px solid var(--accent);
+  border-bottom: 1px solid var(--rule);
+
+  div { min-width: 0; }
+  dt { font-size: 14px; color: var(--muted); }
+  dd { margin: 0; font-family: var(--mono); font-size: 15px; color: var(--ink); }
+}
+
+.section {
+  padding-top: 8px;
+  > h2 { margin-top: 48px; }
+  > p { max-width: 42em; }
+}
+
+.console {
+  margin: 20px 0 0;
+  padding: 24px;
+  background: var(--console-bg);
+  color: var(--console-fg);
+  font-family: var(--vga);
+  font-size: 16px;
+  line-height: 1;
+  overflow-x: auto;
+}
+
+.cursor {
+  display: inline-block;
+  width: 0.5em;
+  height: 1em;
+  vertical-align: top;
+  background: var(--console-bright);
+  animation: blink 1.07s steps(1) infinite;
+}
+
+@keyframes blink { 50% { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor { animation: none; }
+}
+
+.overview {
+  display: grid;
+  gap: 32px 56px;
+  align-items: start;
+
+  @media (min-width: 62rem) {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    // line the diagram up with the list under the heading
+    .blocks { margin-top: 112px; }
+  }
+}
+
+.features-list {
+  h3:first-of-type { margin-top: 0; }
+
+  ul { padding-left: 1.1em; font-size: 17px; line-height: 1.55; }
+  li + li { margin-top: 3px; }
+  li::marker { color: var(--accent); }
+}
+
+// Figure 1
+
+.blocks {
+  margin: 0;
+
+  // on phones the labels would shrink past reading: keep a size and scroll instead
+  overflow-x: auto;
+  svg { display: block; width: 100%; min-width: 560px; height: auto; }
+
+  .band { fill: var(--fill); }
+  .box { fill: var(--paper); stroke: var(--accent); stroke-width: 1; }
+  .chip { fill: var(--fill-strong); }
+  .hw { fill: var(--ink); }
+  .gap { fill: var(--paper); }
+  .t { font: 600 13.5px var(--sans); fill: var(--ink); }
+  .l { font: 500 11px var(--sans); fill: var(--muted); }
+  .s { font: 400 10.5px var(--mono); font-stretch: 87.5%; fill: var(--text); }
+  .hwt { font: 600 13px var(--sans); fill: var(--paper); }
+  .sys { stroke: var(--accent); stroke-dasharray: 5 4; stroke-width: 1.25; }
+  .syst { font: 500 11px var(--mono); fill: var(--accent); }
+}
+
+figcaption, caption {
+  margin-top: 10px;
+  font-size: 15px;
+  color: var(--muted);
+  text-align: left;
+
+  b { color: var(--ink); }
+}
+
+// tables, as on a datasheet
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 16.5px;
+}
+
+caption { caption-side: top; margin: 0; padding-bottom: 8px; }
+
+th {
+  background: var(--fill);
+  color: var(--ink);
+  font-weight: 600;
+  text-align: left;
+}
+
+th, td {
+  padding: 8px 14px;
+  border: 1px solid var(--rule);
+  vertical-align: top;
+}
+
+td:first-child { color: var(--ink); }
+td code { white-space: nowrap; }
+
+// two-column tables in Markdown have empty header rows; don't draw them
+thead:has(th:empty:first-child) { display: none; }
+
+.post-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0 16px;
+    max-width: 42em;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  time { color: var(--muted); font-family: var(--mono); font-size: 14px; }
+}
+
+// pages and posts: notes on the left, the text on the right
+
+.doc {
+  display: grid;
+  gap: 20px;
+  padding-top: 36px;
+
+  @media (min-width: 56rem) {
+    grid-template-columns: 13rem minmax(0, 1fr);
+    gap: 64px;
+  }
+}
+
+.doc-aside {
+  font-size: 16.5px;
+
+  @media (min-width: 56rem) {
+    // line the aside up with the page's title
+    padding-top: 10px;
+  }
+}
+
+.muted { color: var(--muted); }
+
+.toc {
+  ul { list-style: none; padding: 0; margin: 0; }
+  li { padding: 3px 0; }
+  a { color: var(--ink); text-decoration: none; }
+  a:hover { color: var(--accent); }
+
+  &.numbered {
+    ul { counter-reset: toc; }
+    li { counter-increment: toc; }
+    li::before { content: counter(toc); display: inline-block; width: 1.75em; color: var(--accent); font-family: var(--mono); font-size: 14px; }
+  }
+
+  @media (min-width: 56rem) {
+    position: sticky;
+    top: 24px;
+  }
+
+  // on small screens the text follows straight after the title
+  @media (max-width: 55.99rem) { display: none; }
+}
+
+.prose {
+  min-width: 0;
+  max-width: 48rem;
+
+  > h1 { margin-bottom: 24px; }
+
+  img { max-width: 100%; height: auto; }
+
+  ul, ol { padding-left: 1.3em; }
+  li + li { margin-top: 6px; }
+  li::marker { color: var(--accent); }
+
+  pre {
+    margin: 20px 0;
+    padding: 16px 20px;
+    background: var(--fill);
+    border-left: 3px solid var(--accent);
+    color: var(--ink);
+    line-height: 1.6;
+    overflow-x: auto;
+  }
+
+  .blocks { margin: 28px 0 8px; }
+
+  // datasheet section numbers on Features and Build
+  &.numbered {
+    counter-reset: section;
+
+    h2 { counter-increment: section; }
+    h2::before {
+      content: counter(section);
+      display: inline-block;
+      min-width: 1.6em;
+    }
+  }
+}

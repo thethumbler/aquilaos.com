@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ config.title }}{% endblock %}</title>
+  <meta name="description" content="{% block description %}{{ config.description }}{% endblock %}">
+  <meta name="color-scheme" content="light dark">
+  <link rel="preload" href="{{ get_url(path='fonts/ibm-plex-sans.woff2') }}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ get_url(path='style.css', cachebust=true) }}">
+  <link rel="icon" href="{{ get_url(path='favicon.svg') }}" type="image/svg+xml">
+  <link rel="alternate" type="application/atom+xml" title="{{ config.title }} blog" href="{{ get_url(path='atom.xml') }}">
+</head>
+<body class="{% block body_class %}{% endblock %}">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="wordmark" href="{{ get_url(path='/') }}">AquilaOS</a>
+    <nav aria-label="Site">
+      {% for item in config.extra.nav %}
+      <a href="{{ get_url(path=item.path) }}"{% if current_path and current_path is starting_with(pat=item.path) %} aria-current="page"{% endif %}>{{ item.name }}</a>
+      {% endfor %}
+      <a href="{{ config.extra.repo }}">Source</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <p>AquilaOS is in the public domain (<a href="{{ config.extra.repo }}/blob/main/LICENSE">CC0</a>). Written by {{ config.extra.author }}.</p>
+    <p class="footer-links"><a href="{{ config.extra.repo }}">github.com/thethumbler/aquila</a> <a href="{{ get_url(path='atom.xml') }}">Blog feed</a></p>
+  </footer>
+</body>
+</html>

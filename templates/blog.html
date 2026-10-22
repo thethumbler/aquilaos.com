@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}{{ section.title }} | {{ config.title }}{% endblock %}
+
+{% block content %}
+{% set years = section.pages | group_by(attribute="year") %}
+<div class="doc">
+  <aside class="doc-aside">
+    <nav class="toc" aria-labelledby="toc-heading">
+      <p id="toc-heading" class="muted">Years</p>
+      <ul>
+        {% for year, posts in years %}
+        <li><a href="#y{{ year }}">{{ year }}</a></li>
+        {% endfor %}
+      </ul>
+    </nav>
+    <p><a href="{{ get_url(path='atom.xml') }}">Subscribe to the feed</a></p>
+  </aside>
+  <article class="prose">
+    <h1>{{ section.title }}</h1>
+    {{ section.content | safe }}
+    {% for year, posts in years %}
+    <h2 id="y{{ year }}">{{ year }}</h2>
+    <ul class="post-list">
+      {% for page in posts %}
+      <li><a href="{{ page.permalink }}">{{ page.title }}</a> <time datetime="{{ page.date }}">{{ page.date | date(format="%-d %B") }}</time></li>
+      {% endfor %}
+    </ul>
+    {% endfor %}
+  </article>
+</div>
+{% endblock %}

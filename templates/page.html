@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+{% block description %}{{ page.description | default(value=config.description) }}{% endblock %}
+
+{% block content %}
+<div class="doc">
+  <aside class="doc-aside">
+    {% if page.date %}
+    <p><time datetime="{{ page.date }}">{{ page.date | date(format="%-d %B %Y") }}</time></p>
+    {% endif %}
+    {% if page.extra.archived %}
+    <p class="muted">From the 2018 archive. AquilaOS has changed a lot since; some of this is no longer how the system works.</p>
+    <p><a href="{{ get_url(path='@/blog/_index.md') }}">All posts</a></p>
+    {% endif %}
+    {% if page.toc %}
+    <nav class="toc{% if page.extra.numbered %} numbered{% endif %}" aria-labelledby="toc-heading">
+      <p id="toc-heading" class="muted">On this page</p>
+      <ul>
+        {% for h in page.toc %}
+        <li><a href="{{ h.permalink }}">{{ h.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </nav>
+    {% endif %}
+  </aside>
+  <article class="prose{% if page.extra.numbered %} numbered{% endif %}">
+    <h1>{{ page.title }}</h1>
+    {% if page.extra.lede %}{{ page.extra.lede | markdown | safe }}{% endif %}
+    {% if page.extra.diagram %}{% include "partials/blocks.html" %}{% endif %}
+    {{ page.content | safe }}
+  </article>
+</div>
+{% endblock %}

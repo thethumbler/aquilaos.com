@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block body_class %}home{% endblock %}
+
+{% block content %}
+{% set boot = load_data(path="data/boot.txt", format="plain") %}
+{% set blog = get_section(path="blog/_index.md") %}
+
+<section class="hero">
+  <div class="hero-text">
+    <h1>A UNIX-like operating system, written from the kernel up.</h1>
+    <p class="lede">AquilaOS is a hobby operating system: a monolithic kernel, a C library and the tools around them, built toward POSIX. It runs on x86-64 and i386, boots in QEMU, and runs dash, bash, curl, X and Doom.</p>
+    <p class="actions">
+      <a class="button" href="{{ config.extra.repo }}">Read the source</a>
+      <a href="{{ get_url(path='@/build.md') }}">Build and run it</a>
+    </p>
+  </div>
+</section>
+
+<dl class="facts">
+  <div><dt>Version</dt><dd>0.0.2</dd></div>
+  <div><dt>Architectures</dt><dd>x86-64, i386</dd></div>
+  <div><dt>Standard</dt><dd>POSIX.1-2008</dd></div>
+  <div><dt>License</dt><dd>Public domain (CC0)</dd></div>
+  <div><dt>Updated</dt><dd>October 2026</dd></div>
+</dl>
+
+<section class="section" aria-labelledby="boot-heading">
+  <h2 id="boot-heading">Booting</h2>
+  <p>The x86-64 kernel booting in QEMU with its console on the serial port. These lines are from the kernel's log, trimmed.</p>
+  <pre class="console" tabindex="0">{{ boot | escape }}<span class="cursor" aria-hidden="true"></span></pre>
+</section>
+
+<section class="section overview" aria-labelledby="overview-heading">
+  <div class="features-list">
+    <h2 id="overview-heading">Features</h2>
+    <h3>Kernel</h3>
+    <ul>
+      <li>Monolithic, with processes, threads and kernel threads</li>
+      <li>Sessions, process groups and job control</li>
+      <li>POSIX signals, delivered on return to user mode</li>
+      <li>Copy-on-write, demand paging and <code>mmap</code></li>
+      <li>APIC with MSI; a clock to the nanosecond from the TSC or HPET</li>
+    </ul>
+    <h3>Storage and devices</h3>
+    <ul>
+      <li>ext2 and minix, read and write; tmpfs, procfs, devfs, devpts</li>
+      <li>Virtual terminals on the framebuffer or VGA text mode</li>
+      <li>ATA disks, PS/2 input, 8250 UART, VESA framebuffer</li>
+    </ul>
+    <h3>Network</h3>
+    <ul>
+      <li>Intel e1000 and e1000e Ethernet</li>
+      <li>IPv4, ARP and ICMP; UDP and TCP (RFC 9293)</li>
+      <li>DHCP client and DNS resolver</li>
+    </ul>
+    <h3>User space</h3>
+    <ul>
+      <li>newlib 4.6, dash, sbase, runit as init</li>
+      <li>About 45 ports: bash, curl with TLS, tcc, Lua, X with dwm and st, Doom</li>
+    </ul>
+    <p><a href="{{ get_url(path='@/features.md') }}">All features and ports</a></p>
+  </div>
+  {% include "partials/blocks.html" %}
+</section>
+
+<section class="section" aria-labelledby="start-heading">
+  <h2 id="start-heading">Getting started</h2>
+  <table class="spec">
+    <caption><b>Table 1.</b> Build targets, run from a clone of the repository on Linux.</caption>
+    <thead><tr><th>Command</th><th>What it does</th></tr></thead>
+    <tbody>
+      <tr><td><code>make toolchain</code></td><td>Builds GCC, binutils, newlib and Limine for AquilaOS, once (about 15 minutes)</td></tr>
+      <tr><td><code>make</code></td><td>Builds the kernel, user space and the initrd</td></tr>
+      <tr><td><code>make ports</code></td><td>Builds the optional software: bash, curl, X, Doom and the rest</td></tr>
+      <tr><td><code>make run</code></td><td>Boots it in QEMU, with the console on the serial port</td></tr>
+      <tr><td><code>make test</code></td><td>Runs the test suite in QEMU</td></tr>
+    </tbody>
+  </table>
+  <p><a href="{{ get_url(path='@/build.md') }}">Prerequisites and the other ways to run it</a></p>
+</section>
+
+{% if blog.pages %}
+<section class="section" aria-labelledby="latest-heading">
+  <h2 id="latest-heading">From the blog</h2>
+  <ul class="post-list">
+    {% for page in blog.pages[:3] %}
+    <li><a href="{{ page.permalink }}">{{ page.title }}</a> <time datetime="{{ page.date }}">{{ page.date | date(format="%B %Y") }}</time></li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+{% endblock %}

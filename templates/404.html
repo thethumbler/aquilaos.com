@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Page not found | {{ config.title }}{% endblock %}
+
+{% block content %}
+<div class="doc">
+  <aside class="doc-aside"></aside>
+  <article class="prose">
+    <h1>Page not found</h1>
+    <p>There's no page at this address. It may have moved when the site was rebuilt in 2026.</p>
+    <p><a href="{{ get_url(path='/') }}">Go to the home page</a> or <a href="{{ get_url(path='@/blog/_index.md') }}">browse the blog</a>.</p>
+  </article>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+base_url = "https://aquilaos.com"
+title = "AquilaOS"
+description = "A UNIX-like operating system: kernel, C library and system tools, built toward POSIX."
+default_language = "en"
+
+compile_sass = true
+minify_html = false
+build_search_index = false
+generate_feeds = true
+feed_filenames = ["atom.xml"]
+
+[markdown]
+smart_punctuation = false
+
+[extra]
+repo = "https://github.com/thethumbler/aquila"
+site_repo = "https://github.com/thethumbler/aquilaos.com"
+author = "Mohamed Hamza"
+nav = [
+  { name = "Features", path = "/features/" },
+  { name = "Build", path = "/build/" },
+  { name = "Blog", path = "/blog/" },
+]
