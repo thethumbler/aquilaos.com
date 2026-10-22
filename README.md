@@ -7,7 +7,7 @@ zola serve      # http://127.0.0.1:1111, rebuilt on every change
 zola build      # into public/
 ```
 
-Pushes to `master` are built and deployed to GitHub Pages by
+Pushes to `main` are built and deployed to GitHub Pages by
 [.github/workflows/deploy.yml](.github/workflows/deploy.yml).
 
 - `content/`: pages and blog posts (Markdown)
