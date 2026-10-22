@@ -134,7 +134,7 @@ code { color: var(--ink); }
 .site-header {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   gap: 6px 24px;
   padding-top: 22px;
@@ -150,16 +150,22 @@ code { color: var(--ink); }
 
   nav { display: flex; flex-wrap: wrap; gap: 0 24px; }
 
-  // keep the wordmark and the links on one line on phones
+  // on phones the name has a line of its own, the links one below it
   @media (max-width: 30rem) {
     font-size: 16px;
     line-height: 24px;
-    column-gap: 16px;
-    nav { gap: 0 12px; }
+    nav { gap: 0 16px; }
   }
 }
 
-.wordmark { color: var(--ink); }
+// the name, at twice unscii's size (crisp), over the links at 1.25 times
+.wordmark {
+  color: var(--ink);
+  font-size: 32px;
+  line-height: 32px;
+
+  @media (max-width: 30rem) { font-size: 24px; line-height: 24px; }
+}
 
 .site-footer {
   margin-top: 72px;
