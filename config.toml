@@ -19,5 +19,6 @@ author = "Mohamed Hamza"
 nav = [
   { name = "Features", path = "/features/" },
   { name = "Build", path = "/build/" },
+  { name = "Try", path = "/try/" },
   { name = "Blog", path = "/blog/" },
 ]

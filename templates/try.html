@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+{% block description %}{{ page.description | default(value=config.description) }}{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ get_url(path='try/xterm.css') }}">
+
+<article class="try" id="try">
+  <h1>{{ page.title }}</h1>
+  <p class="lede">The i386 base system, running in your browser on <a href="https://github.com/copy/v86">v86</a>, a PC emulator. It runs from memory: nothing is kept, and nothing is sent anywhere.</p>
+
+  <div class="try-main">
+    <div class="try-machine">
+      <div class="try-screen">
+        <div class="try-off">
+          <button class="button" id="try-start" type="button">Start AquilaOS</button>
+          <p>About 5 MB to download. Log in as <code>root</code>, with no password.</p>
+        </div>
+        <div id="try-terminal"></div>
+      </div>
+      <div class="try-bar">
+        <p class="try-status" id="try-status" role="status" aria-live="polite"></p>
+        <button class="link" id="try-restart" type="button" hidden>Restart</button>
+      </div>
+    </div>
+
+    <div class="try-notes">
+      {{ page.content | safe }}
+    </div>
+  </div>
+</article>
+
+<script src="{{ get_url(path='try/xterm.js') }}"></script>
+<script src="{{ get_url(path='try/libv86.js') }}"></script>
+<script src="{{ get_url(path='try/try.js') }}"></script>
+{% endblock %}

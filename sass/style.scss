@@ -144,14 +144,19 @@ code { color: var(--ink); }
   font-size: 20px;
   line-height: 28px;
 
-  // keep the wordmark and the links on one line on phones
-  @media (max-width: 30rem) { font-size: 16px; line-height: 24px; }
-
   a { color: var(--ink); text-decoration: none; }
   a:hover, a[aria-current] { color: var(--accent); }
   a[aria-current] { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.4em; }
 
   nav { display: flex; flex-wrap: wrap; gap: 0 24px; }
+
+  // keep the wordmark and the links on one line on phones
+  @media (max-width: 30rem) {
+    font-size: 16px;
+    line-height: 24px;
+    column-gap: 16px;
+    nav { gap: 0 12px; }
+  }
 }
 
 .wordmark { color: var(--ink); }
@@ -426,5 +431,104 @@ thead:has(th:empty:first-child) { display: none; }
       display: inline-block;
       min-width: 1.6em;
     }
+  }
+}
+
+// Try: AquilaOS on v86, its serial console in xterm.js
+
+[hidden] { display: none !important; }
+
+.try {
+  padding-top: 36px;
+
+  > h1, > .lede { max-width: 42rem; }
+  > .lede { font-size: 19px; }
+}
+
+.try-main { margin-top: 28px; }
+
+.try-machine { min-width: 0; }
+
+// the console's 80x25 cells, in unscii at the largest size that fits: its
+// glyphs are half as wide as they're tall, so the terminal is 40 by 25 ems
+.try-screen {
+  --font: 16px;
+  position: relative;
+  container-type: inline-size;
+  overflow-x: auto;
+  padding: 24px;
+  background: var(--console-bg);
+
+  #try-terminal {
+    width: calc(var(--font) * 40);
+    height: calc(var(--font) * 25);
+    margin: 0 auto;
+  }
+}
+
+@container (min-width: 800px) { #try-terminal { --font: 20px; } }
+@container (min-width: 960px) { #try-terminal { --font: 24px; } }
+
+// before it's started: the screen with the button on it
+.try-off {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px;
+  text-align: center;
+  color: var(--console-fg);
+  font-size: 16px;
+
+  p { margin: 0; max-width: 28em; }
+  code { color: var(--console-bright); }
+}
+
+.try.running .try-off { display: none; }
+
+.button { border: 0; font: inherit; font-weight: 500; cursor: pointer; }
+
+.try-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+  margin-top: 10px;
+  min-height: 1.6em;
+  font-size: 16px;
+
+  .link {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--accent);
+    font: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+    cursor: pointer;
+  }
+}
+
+.try-status { margin: 0; color: var(--muted); }
+
+.try-notes {
+  max-width: 48rem;
+  margin-top: 8px;
+
+  ul { padding-left: 1.1em; }
+  li + li { margin-top: 6px; }
+  li::marker { color: var(--accent); }
+
+  pre {
+    margin: 16px 0 20px;
+    padding: 14px 18px;
+    background: var(--fill);
+    border-left: 3px solid var(--accent);
+    color: var(--ink);
+    line-height: 1.6;
+    overflow-x: auto;
   }
 }
