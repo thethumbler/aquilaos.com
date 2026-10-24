@@ -1,8 +1,9 @@
 x86: Welcome to AquilaOS!
-kernel: 255 MiB of memory, up to 0x000000000FC00000
+kernel: 255 MiB of memory, up to 0x0000000010000000
 x86_64: 256 MiB in the direct map
 apic: local APIC 0 at 0x00000000FEE00000, 1 I/O APIC(s), the first at 0x00000000FEC00000 (GSI 0, 24 pins)
 x86: interrupts through the apic
+smp: 4 CPUs
 vt: 6 terminals of 80x25 on VGA text mode
 kdev: registered blkdev 3: ata
 net: lo: loopback, 127.0.0.1/8
@@ -16,5 +17,5 @@ login: root
 Welcome to AquilaOS!
 
 # uname -a
-AquilaOS aquila v0.0.2 Oct 22 2026 04:32:00 gcc 15.3.0 x86_64
+AquilaOS aquila v0.0.2 Oct 24 2026 15:27:52 gcc 15.3.0 x86_64
 # 

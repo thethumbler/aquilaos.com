@@ -4,7 +4,7 @@
     <text class="l" x="16" y="19">User space</text>
     <rect class="box" x="16" y="30" width="372" height="52"/>
     <text class="t" x="28" y="51">Ports</text>
-    <text class="s" x="28" y="70">bash  curl  tcc  Lua  vis  X  dwm  st  Doom</text>
+    <text class="s" x="28" y="70">bash  curl  tcc  Lua  X  dwm  Nano-X  Doom</text>
     <rect class="box" x="400" y="30" width="224" height="52"/>
     <text class="t" x="412" y="51">Base system</text>
     <text class="s" x="412" y="70">dash  sbase  runit  nc  aqbox</text>
@@ -21,7 +21,7 @@
     <text class="l" x="16" y="195">Kernel</text>
     <rect class="box" x="16" y="206" width="112" height="72"/>
     <text class="t" x="26" y="228">Processes</text>
-    <text class="s" x="26" y="248">threads</text><text class="s" x="26" y="264">signals, jobs</text>
+    <text class="s" x="26" y="248">threads, SMP</text><text class="s" x="26" y="264">signals, jobs</text>
     <rect class="box" x="138" y="206" width="112" height="72"/>
     <text class="t" x="148" y="228">Memory</text>
     <text class="s" x="148" y="248">COW, paging</text><text class="s" x="148" y="264">buddy, vmem</text>
@@ -42,10 +42,10 @@
     <rect class="chip" x="280" y="310" width="80" height="28"/><text class="s" x="320" y="328" text-anchor="middle">e1000</text>
     <rect class="chip" x="368" y="310" width="80" height="28"/><text class="s" x="408" y="328" text-anchor="middle">fbdev</text>
     <rect class="chip" x="456" y="310" width="80" height="28"/><text class="s" x="496" y="328" text-anchor="middle">PS/2</text>
-    <rect class="chip" x="544" y="310" width="80" height="28"/><text class="s" x="584" y="328" text-anchor="middle">8250</text>
+    <rect class="chip" x="544" y="310" width="80" height="28"/><text class="s" x="584" y="328" text-anchor="middle">8250, PL011</text>
 
     <rect class="hw" x="0" y="362" width="640" height="44"/>
-    <text class="hwt" x="320" y="389" text-anchor="middle">x86-64 or i386 PC, or QEMU</text>
+    <text class="hwt" x="320" y="389" text-anchor="middle">x86-64 and i386 PCs, aarch64 (QEMU virt)</text>
   </svg>
   <figcaption id="blocks-caption"><b>Figure 1.</b> The parts of AquilaOS, from the hardware up. Everything below the dashed line runs in the kernel.</figcaption>
 </figure>
